@@ -1,0 +1,113 @@
+<div
+  class="modal fade"
+  id="formModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="formModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form ng-submit="submitForm()">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalLabel">Yeni Form Oluştur</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="formName">Form Adı</label>
+            <input
+              type="text"
+              class="form-control"
+              id="formName"
+              ng-model="formName"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Açıklama</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="description"
+              ng-model="description"
+              required
+            ></textarea>
+          </div>
+          <div
+            class="form-row mt-3"
+            ng-repeat="fieldValue in fields track by $index"
+          >
+            <div class="col">
+              <label for="dataType-{{$index}}" ng-if="$index == 0"
+                >Data Tipi</label
+              >
+              <select
+                id="dataType-{{$index}}"
+                ng-model="fieldValue.dataType"
+                class="form-control"
+                required
+              >
+                <option value="">Seçim Yapınız</option>
+                <option value="STRING">Metin</option>
+                <option value="NUMBER">Sayı</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="formName-{{$index}}" ng-if="$index == 0"
+                >Input Adı</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="fieldName-{{$index}}"
+                ng-model="fieldValue.name"
+                required
+              />
+            </div>
+            <div
+              class="col"
+              style="display: flex; align-items: end; justify-content: center"
+            >
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="required-{{$index}}"
+                  ng-model="fieldValue.required"
+                />
+                <label class="form-check-label" for="required-{{$index}}">
+                  Required
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="form-row mt-2">
+            <div class="col">
+              <button
+                type="button"
+                class="btn btn-success"
+                ng-click="addField()"
+              >
+                Yeni Field Ekle
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Kapat
+          </button>
+          <button type="submit" class="btn btn-primary">Formu Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
